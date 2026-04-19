@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+ flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask("Emotion Detector")
@@ -30,11 +30,4 @@ def sent_detector():
     )
 
 @app.route("/")
-def render_index_page():
-    """
-    Renderiza la página de inicio.
-    """
-    return render_template('index.html')
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+def render_index_page()
