@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='mywebscript.js') }}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="system_name">Emotion Detector</h1>
+        <div class="input-section">
+            <p>Enter the text you want to analyze for emotions:</p>
+            <textarea id="textToAnalyze" rows="4" cols="50" placeholder="Type your text here..."></textarea><br><br>
+            <button onclick="RunSentimentAnalysis()">Analyze Sentiment</button>
+        </div>
+        <div id="system_response"></div>
+    </div>
+</body>
+                                    </html>
