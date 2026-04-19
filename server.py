@@ -6,37 +6,33 @@ app = Flask("Emotion Detector")
 @app.route("/emotionDetector")
 def sent_detector():
     """
-    Recibe el texto del frontend, lo analiza y devuelve una respuesta formateada.
+    Analiza el texto recibido y maneja casos de error o entradas vacías.
     """
-    # Obtener el texto a analizar desde los parámetros de la URL
+    # Obtener el texto del parámetro de la URL
     text_to_analyze = request.args.get('textToAnalyze')
 
-    # Ejecutar la función de detección de emociones
+    # Ejecutar la función de detección
     response = emotion_detector(text_to_analyze)
 
-    # Extraer las puntuaciones y la emoción dominante
-    anger = response['anger']
-    disgust = response['disgust']
-    fear = response['fear']
-    joy = response['joy']
-    sadness = response['sadness']
+    # Extraer la emoción dominante para validar
     dominant_emotion = response['dominant_emotion']
 
-    # Si no se encuentra una emoción dominante (en caso de error futuro)
+    # VALIDACIÓN DE ERROR: Si la emoción es None, el texto es inválido
     if dominant_emotion is None:
-        return "Invalid text! Please try again!."
+        return "Invalid text! Please try again!"
 
-    # Retornar la respuesta formateada como pide la rúbrica
+    # Si todo está bien, formatear la respuesta exitosa
     return (
-        f"For the given statement, the system response is 'anger': {anger}, "
-        f"'disgust': {disgust}, 'fear': {fear}, 'joy': {joy} and 'sadness': {sadness}. "
+        f"For the given statement, the system response is 'anger': {response['anger']}, "
+        f"'disgust': {response['disgust']}, 'fear': {response['fear']}, "
+        f"'joy': {response['joy']} and 'sadness': {response['sadness']}. "
         f"The dominant emotion is {dominant_emotion}."
     )
 
 @app.route("/")
 def render_index_page():
     """
-    Renderiza la página principal de la aplicación.
+    Renderiza la página de inicio.
     """
     return render_template('index.html')
 
